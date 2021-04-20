@@ -2,7 +2,7 @@
 # File name:    application.py
 # Author:       Zhangshun Lu
 # Create on:    2021-04-20
-# Description:  GUI application for managing the workshop inventory  
+# Description:  GUI application for managing the workshop inventory
 # #################################################################
 
 from PyQt5 import QtCore
@@ -104,7 +104,7 @@ class MainWindow(QMainWindow):
 
         btn_clear = QPushButton("Clear", self)
         btn_clear.clicked.connect(self.clear)
-        btn_clear.setIcon(QIcon("icon/add.png"))
+        btn_clear.setIcon(QIcon("icon/clear.png"))
         btn_clear.setFixedWidth(100)
         btn_clear.setFixedHeight(35)
 
@@ -191,6 +191,7 @@ class MainWindow(QMainWindow):
         if self.key == "ELECTRONICS":
             self.result = database_ee.show_table()
         elif self.key == "MECHANICS":
+            self.tableWidget.setColumnCount(6)
             self.result = database_mech.show_table()
         self.display()
 
@@ -214,6 +215,7 @@ class MainWindow(QMainWindow):
     def select_table(self):
         self.key = self.item_info_window.pageCombo.currentText()
         if self.key == "ELECTRONICS":
+            self.tableWidget.setColumnCount(10)
             self.tableWidget.setHorizontalHeaderLabels(
                 ("Item id", "Description", "Manufacture Part No.", "Category",
                  "Package", "Value", "Unit", "Cabinet", "Amount", "Notes"))
@@ -298,12 +300,14 @@ class MainWindow(QMainWindow):
                     str(first_matched_item[1]))
                 self.item_info_window.part_number_ee.setText(
                     str(first_matched_item[2]))
-                self.item_info_window.category_ee.setCurrentText(first_matched_item[3])
+                self.item_info_window.category_ee.setCurrentText(
+                    first_matched_item[3])
                 self.item_info_window.package_ee.setText(
                     str(first_matched_item[4]))
                 self.item_info_window.value_ee.setText(
                     str(first_matched_item[5]))
-                self.item_info_window.unit_ee.setCurrentText(first_matched_item[6])
+                self.item_info_window.unit_ee.setCurrentText(
+                    first_matched_item[6])
                 self.item_info_window.cabinet_ee.setText(
                     str(first_matched_item[7]))
                 self.item_info_window.amount_ee .setText(
@@ -319,7 +323,8 @@ class MainWindow(QMainWindow):
                     str(first_matched_item[1]))
                 self.item_info_window.part_number_mech.setText(
                     str(first_matched_item[2]))
-                self.item_info_window.category_mech.setCurrentText(first_matched_item[3])
+                self.item_info_window.category_mech.setCurrentText(
+                    first_matched_item[3])
                 self.item_info_window.cabinet_mech.setText(
                     str(first_matched_item[4]))
                 self.item_info_window.amount_mech .setText(
